@@ -5,7 +5,7 @@ This is a simple CLI gumball machine written in Python 3.11.
 It comes complete with type annotations and docstrings. It also passes static type checking with `mypy`:
 
 ```
-> python -m mypy .
+$ python -m mypy .
 Success: no issues found in 4 source files
 ```
 
