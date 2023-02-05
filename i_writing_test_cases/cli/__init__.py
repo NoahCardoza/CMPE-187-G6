@@ -9,6 +9,9 @@ class GumballMachineCLI:
 
     def __init__(self, gumball_machine: GumballMachine):
         """Initializes the gumball machine CLI.
+
+        Args:
+            gumball_machine (GumballMachine): The gumball machine to wrap.
         """
         self.gumball_machine = gumball_machine
         self.unrecognized_coins: List[str] = []
@@ -25,7 +28,7 @@ class GumballMachineCLI:
     def run_insert_coin(self):
         """Provided a coin choice menu to the user and inserts the coin value into the gumball machine.
         """
-        print("\n> Provide a coin by entering it's name. For example nickel, dime, quarter, etc.:",)
+        print('\n> Provide a coin by entering it\'s name. Accepted coin names are "nickel", "dime", and "quarter".',)
         coin_choice = input("* ")
         coin_choice_clean = coin_choice.strip().lower()
 
@@ -40,7 +43,7 @@ class GumballMachineCLI:
             self.unrecognized_coins.append(coin_choice)
             return
         
-        self.gumball_machine.insert_coin(coin)
+        self.gumball_machine.exchange_coin(coin)
         print('\n# Inserting coin...\n{}'.format(self.format_machine_balance_line()))
 
     def run_dispense_red_gumball(self):
@@ -67,6 +70,12 @@ class GumballMachineCLI:
         """Withdraws the remaining money in the gumball machine and prints the value to the user.
         """
         change = self.gumball_machine.return_change()
+        self.running = False
+
+        if change == 0:
+            print("\n# There is no change to return.")
+            return
+
         print("\n# Returning ${:.2f} in change.".format(change / 100))
         
         if self.unrecognized_coins:
@@ -75,7 +84,6 @@ class GumballMachineCLI:
                 print("# - {}".format(coin))
             self.unrecognized_coins = []
 
-        self.running = False
 
     def run(self):
         """Runs the gumball machine loop allowing user interaction.

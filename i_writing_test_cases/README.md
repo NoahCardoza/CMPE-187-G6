@@ -17,7 +17,7 @@ $ python main.py
 
 ## Example Output
 
-``` 
+```
 Welcome to the Gumball Machine!
 
 > What would you like to do? 
@@ -29,7 +29,7 @@ Welcome to the Gumball Machine!
 
 * Enter your choice: 1
 
-> Provide a coin by entering it's name. For example nickel, dime, quarter, etc.:
+> Provide a coin by entering it's name. Accepted coin names are "nickel", "dime", and "quarter".
 * penny
 
 ! Invalid coin. All invalid coins will be returned upon requesting your unused change.
@@ -43,7 +43,7 @@ Welcome to the Gumball Machine!
 
 * Enter your choice: 1
 
-> Provide a coin by entering it's name. For example nickel, dime, quarter, etc.:
+> Provide a coin by entering it's name. Accepted coin names are "nickel", "dime", and "quarter".
 * quarter
 
 # Inserting coin...
@@ -82,7 +82,7 @@ Welcome to the Gumball Machine!
 
 * Enter your choice: 1
 
-> Provide a coin by entering it's name. For example nickel, dime, quarter, etc.:
+> Provide a coin by entering it's name. Accepted coin names are "nickel", "dime", and "quarter".
 * half-dollar
 
 ! Invalid coin. All invalid coins will be returned upon requesting your unused change.

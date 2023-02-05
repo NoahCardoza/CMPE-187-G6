@@ -22,11 +22,12 @@ class GumballMachine:
         """
         return self.money
 
-    def insert_coin(self, coin: Coin):
-        """Inserts a coin into the machine.
+    def exchange_coin(self, coin: Coin):
+        """Exchanges a coin for credit within the machine to later
+        be exchanged for gumballs or returned to the user.
 
         Args:
-            value (int): The value of the coin in cents.
+            coin (int): The coin to exchange.
         """
         
         self.money += coin.value
