@@ -1,20 +1,7 @@
-from typing import Literal, cast
+from typing import List
 
-from cli.menus import display_coin_menu, display_main_menu
-from gumball_machine import GumballMachine
-
-
-def convert_coin_menu_choice_to_cents(choice: Literal[0, 1, 2]) -> Literal[5, 10, 25]:
-    """Converts the coin menu choice to the value of the coin in cents.
-
-    Args:
-        choice (Literal[0, 1, 2]): The coin menu choice.
-
-    Returns:
-        int: the value if the coin choice in cents, nickel (5), dime (10), and quarter (25).
-    """
-    return cast(Literal[5, 10, 25], [5, 10, 25][choice])
-
+from cli.menus import MenuChoice, display_main_menu
+from gumball_machine import Coin, GumballMachine
 
 
 class GumballMachineCLI:
@@ -24,6 +11,7 @@ class GumballMachineCLI:
         """Initializes the gumball machine CLI.
         """
         self.gumball_machine = gumball_machine
+        self.unrecognized_coins: List[str] = []
         self.running = False
 
     def format_machine_balance_line(self) -> str:
@@ -37,9 +25,22 @@ class GumballMachineCLI:
     def run_insert_coin(self):
         """Provided a coin choice menu to the user and inserts the coin value into the gumball machine.
         """
-        coin_choice = display_coin_menu()
-        coin_value = convert_coin_menu_choice_to_cents(coin_choice)
-        self.gumball_machine.insert_coin(coin_value)
+        print("\n> Provide a coin by entering it's name. For example nickel, dime, quarter, etc.:",)
+        coin_choice = input("* ")
+        coin_choice_clean = coin_choice.strip().lower()
+
+        if coin_choice_clean == "nickel":
+            coin = Coin.NICKEL
+        elif coin_choice_clean == "dime":
+            coin = Coin.DIME
+        elif coin_choice_clean == "quarter":
+            coin = Coin.QUARTER
+        else:
+            print("\n! Invalid coin. All invalid coins will be returned upon requesting your unused change.")
+            self.unrecognized_coins.append(coin_choice)
+            return
+        
+        self.gumball_machine.insert_coin(coin)
         print('\n# Inserting coin...\n{}'.format(self.format_machine_balance_line()))
 
     def run_dispense_red_gumball(self):
@@ -67,6 +68,13 @@ class GumballMachineCLI:
         """
         change = self.gumball_machine.return_change()
         print("\n# Returning ${:.2f} in change.".format(change / 100))
+        
+        if self.unrecognized_coins:
+            print("# The following coins were not recognized:")
+            for coin in self.unrecognized_coins:
+                print("# - {}".format(coin))
+            self.unrecognized_coins = []
+
         self.running = False
 
     def run(self):
@@ -78,13 +86,13 @@ class GumballMachineCLI:
         while self.running:
             main_menu_choice = display_main_menu()
 
-            if main_menu_choice == 0:
+            if MenuChoice.INSERT_COIN == main_menu_choice:
                 self.run_insert_coin()
-            elif main_menu_choice == 1:
+            elif MenuChoice.DISPENSE_RED_GUMBALL == main_menu_choice:
                 self.run_dispense_red_gumball()
-            elif main_menu_choice == 2:
+            elif MenuChoice.DISPENSE_YELLOW_GUMBALL == main_menu_choice:
                 self.run_dispense_yellow_gumball()
-            elif main_menu_choice == 3:
+            elif MenuChoice.RETURN_CHANGE == main_menu_choice:
                 self.run_return_change()
 
         print("\nThank you for using the Gumball Machine!")

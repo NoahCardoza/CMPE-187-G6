@@ -1,4 +1,13 @@
-from typing import List, Literal, cast
+from enum import IntEnum
+from typing import List
+
+
+class MenuChoice(IntEnum):
+    """Represents a menu choice."""
+    INSERT_COIN = 0
+    DISPENSE_RED_GUMBALL = 1
+    DISPENSE_YELLOW_GUMBALL = 2
+    RETURN_CHANGE = 3
 
 
 def ask_choice(prompt: str, choices: List[str]) -> int:
@@ -31,39 +40,20 @@ def ask_choice(prompt: str, choices: List[str]) -> int:
     return choice - 1
 
 
-def display_main_menu() -> Literal[0, 1, 2, 3]:
+def display_main_menu() -> MenuChoice:
     """Displays the main menu and prompts the user to choose an option.
 
     Returns:
-        int: Returns the index of the choice the user made.
+        MenuChoice: Returns the choice the user made.
     """
-    return cast(
-        Literal[0, 1, 2, 3],
-        ask_choice(
-            "What would you like to do?",
-            [
-                "Insert coin",
-                "(5c ) Dispense red gumball",
-                "(10c) Dispense yellow gumball ",
-                "Exit and return change"
-            ]
-        )
+    choice = ask_choice(
+        "What would you like to do?",
+        [
+            "Insert coin",
+            "(5c ) Dispense red gumball",
+            "(10c) Dispense yellow gumball ",
+            "Exit and return change"
+        ]
     )
 
-def display_coin_menu() -> Literal[0, 1, 2]:
-    """Displays the coin menu and prompts the user to choose an option.
-
-    Returns:
-        int: Returns the index of the choice the user made.
-    """
-    return cast(
-        Literal[0, 1, 2], 
-        ask_choice(
-            "Provide a nickel, dime, or quarter to the gumball machine:",
-            [
-                "Nickel",
-                "Dime",
-                "Quarter"
-            ]
-        )
-    )
+    return MenuChoice(choice)

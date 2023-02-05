@@ -29,13 +29,22 @@ Welcome to the Gumball Machine!
 
 * Enter your choice: 1
 
-> Provide a nickel, dime, or quarter to the gumball machine: 
+> Provide a coin by entering it's name. For example nickel, dime, quarter, etc.:
+* penny
 
-1. Nickel
-2. Dime
-3. Quarter
+! Invalid coin. All invalid coins will be returned upon requesting your unused change.
 
-* Enter your choice: 3
+> What would you like to do? 
+
+1. Insert coin
+2. (5c ) Dispense red gumball
+3. (10c) Dispense yellow gumball 
+4. Exit and return change
+
+* Enter your choice: 1
+
+> Provide a coin by entering it's name. For example nickel, dime, quarter, etc.:
+* quarter
 
 # Inserting coin...
 # Your current balance is: $0.25
@@ -71,9 +80,26 @@ Welcome to the Gumball Machine!
 3. (10c) Dispense yellow gumball 
 4. Exit and return change
 
+* Enter your choice: 1
+
+> Provide a coin by entering it's name. For example nickel, dime, quarter, etc.:
+* half-dollar
+
+! Invalid coin. All invalid coins will be returned upon requesting your unused change.
+
+> What would you like to do? 
+
+1. Insert coin
+2. (5c ) Dispense red gumball
+3. (10c) Dispense yellow gumball 
+4. Exit and return change
+
 * Enter your choice: 4
 
 # Returning $0.15 in change.
+# The following coins were not recognized:
+# - penny
+# - half-dollar
 
 Thank you for using the Gumball Machine!
 ```

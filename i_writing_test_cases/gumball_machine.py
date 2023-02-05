@@ -1,4 +1,11 @@
-from typing import Literal
+from enum import IntEnum
+
+
+class Coin(IntEnum):
+    """Represents a coin."""
+    NICKEL = 5
+    DIME = 10
+    QUARTER = 25
 
 
 class GumballMachine:
@@ -15,17 +22,14 @@ class GumballMachine:
         """
         return self.money
 
-    def insert_coin(self, value: Literal[5, 10, 25]):
+    def insert_coin(self, coin: Coin):
         """Inserts a coin into the machine.
 
         Args:
             value (int): The value of the coin in cents.
         """
-
-        if value not in [5, 10, 25]:
-            raise ValueError("Invalid coin value.")
         
-        self.money += value
+        self.money += coin.value
 
     def dispense_red_gumball(self) -> bool:
         """Dispenses a red gumball if there is enough money.
