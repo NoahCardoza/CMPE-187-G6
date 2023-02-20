@@ -1,0 +1,6 @@
+AGE = "Enter your age"
+CA_RESIDENCY = "Have you lived in California for the last two years?"
+PART_TIME_WORK = "Have you worked part or full time for at least for 6 months?"
+PARENTS_LIVED_IN_CA = "Have your parents lived in California for at least one year?"
+VOLUNTEER = "Have you volunteered for a public cause in California and have a valid proof of it?"
+INCOME = "Enter your household income"
